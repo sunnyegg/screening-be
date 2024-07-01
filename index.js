@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 const { youtube } = require("./usecases");
 const logger = require("./utils/logger");
 
@@ -7,10 +8,12 @@ require("./configs/websocket");
 
 const app = express();
 app.use(bodyParser.json());
+app.use(cors());
+
 app.get("/", (_, res) => res.send("ok"));
 
 // const type
-const allTypes = ["youtube-comment", "youtube-view"];
+const allTypes = ["comment", "like", "subscriber", "view"];
 const screeningTypes = new Map();
 for (const v of allTypes) {
   screeningTypes.set(v, true);
@@ -36,8 +39,25 @@ app.post("/screening", async (req, res) => {
       throw new Error("username is empty");
     }
 
-    if (type === "youtube-comment") {
-      youtube.comment(urls, type, username);
+    switch (type) {
+      case "comment":
+        youtube.comment(urls, type, username);
+        break;
+
+      case "like":
+        youtube.like(urls, type, username);
+        break;
+
+      case "subscriber":
+        youtube.subscriber(urls, type, username);
+        break;
+
+      case "view":
+        youtube.view(urls, type, username);
+        break;
+
+      default:
+        break;
     }
 
     return res.status(200).json({
