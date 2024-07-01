@@ -53,7 +53,12 @@ module.exports = {
       await page.setViewport({ width: 1080, height: 1024 });
       await page.waitForNetworkIdle();
 
-      const element = await page.waitForSelector("#subscriber-count");
+      const element = await page.waitForSelector(
+        "span ::-p-text( subscribers)",
+        {
+          timeout: 100,
+        }
+      );
 
       const text = await element.evaluate((el) => el.textContent);
       const convertedText = utils.DigitFormatter(
