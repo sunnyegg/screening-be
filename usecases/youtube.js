@@ -14,6 +14,14 @@ module.exports = {
       for (let i = 0; i < mappedUrls.yt.length; i++) {
         const url = mappedUrls.yt[i];
         await models.youtube.CheckYoutubeComments(browser, url, output);
+        wss.emit(
+          "progress",
+          JSON.stringify({
+            type: "progress",
+            data: 5,
+            username,
+          })
+        );
       }
       await browser.close();
 
@@ -47,6 +55,14 @@ module.exports = {
       for (let i = 0; i < mappedUrls.yt.length; i++) {
         const url = mappedUrls.yt[i];
         await models.youtube.CheckYoutubeLikes(browser, url, output);
+        wss.emit(
+          "progress",
+          JSON.stringify({
+            type: "progress",
+            data: 5,
+            username,
+          })
+        );
       }
       await browser.close();
 
@@ -80,6 +96,14 @@ module.exports = {
       for (let i = 0; i < mappedUrls.yt.length; i++) {
         const url = mappedUrls.yt[i];
         await models.youtube.CheckYoutubeSubscribers(browser, url, output);
+        wss.emit(
+          "progress",
+          JSON.stringify({
+            type: "progress",
+            data: 5,
+            username,
+          })
+        );
       }
       await browser.close();
 
@@ -113,6 +137,14 @@ module.exports = {
       for (let i = 0; i < mappedUrls.yt.length; i++) {
         const url = mappedUrls.yt[i];
         await models.youtube.CheckYoutubeViews(browser, url, output);
+        wss.emit(
+          "progress",
+          JSON.stringify({
+            type: "progress",
+            data: 5,
+            username,
+          })
+        );
       }
       await browser.close();
 

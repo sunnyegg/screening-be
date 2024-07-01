@@ -48,6 +48,18 @@ wss.on("connection", (ws, req) => {
     }
   });
 
+  wss.addListener("progress", (data) => {
+    const dataParsed = JSON.parse(data);
+    if (dataParsed.username && socketUser[dataParsed.username]) {
+      socketUser[dataParsed.username].send(
+        JSON.stringify({
+          type: dataParsed.type,
+          data: dataParsed.data,
+        })
+      );
+    }
+  });
+
   ws.on("message", (data) => {
     controllers.screening(data, socketUser, wss);
   });
