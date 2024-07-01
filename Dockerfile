@@ -18,6 +18,6 @@ COPY . /srv/app/.
 
 RUN npm install
 
-expose 3000 8080
+expose 8080
 
 CMD ["node", "index.js"]
