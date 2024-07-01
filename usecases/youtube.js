@@ -1,12 +1,11 @@
 const puppeteer = require("puppeteer");
 const utils = require("../utils");
-const wss = require("../configs/websocket");
 const logger = require("../utils/logger");
 const puppeteerArgs = require("../configs/puppeteer");
 const models = require("../models");
 
 module.exports = {
-  comment: async (urls, type, username) => {
+  comment: async (urls, type, username, wss) => {
     try {
       const output = new Map();
       const mappedUrls = utils.CheckAndSplitUrls(urls);
@@ -29,10 +28,17 @@ module.exports = {
 
       logger("log", `${type}: ${sent}`);
     } catch (err) {
+      wss.emit(
+        "usecases-error",
+        JSON.stringify({
+          message: err.message,
+          username,
+        })
+      );
       logger("error", `${type}: ${err.message}`);
     }
   },
-  like: async (urls, type, username) => {
+  like: async (urls, type, username, wss) => {
     try {
       const output = new Map();
       const mappedUrls = utils.CheckAndSplitUrls(urls);
@@ -55,10 +61,17 @@ module.exports = {
 
       logger("log", `${type}: ${sent}`);
     } catch (err) {
+      wss.emit(
+        "usecases-error",
+        JSON.stringify({
+          message: err.message,
+          username,
+        })
+      );
       logger("error", `${type}: ${err.message}`);
     }
   },
-  subscriber: async (urls, type, username) => {
+  subscriber: async (urls, type, username, wss) => {
     try {
       const output = new Map();
       const mappedUrls = utils.CheckAndSplitUrls(urls);
@@ -81,10 +94,17 @@ module.exports = {
 
       logger("log", `${type}: ${sent}`);
     } catch (err) {
+      wss.emit(
+        "usecases-error",
+        JSON.stringify({
+          message: err.message,
+          username,
+        })
+      );
       logger("error", `${type}: ${err.message}`);
     }
   },
-  view: async (urls, type, username) => {
+  view: async (urls, type, username, wss) => {
     try {
       const output = new Map();
       const mappedUrls = utils.CheckAndSplitUrls(urls);
@@ -107,6 +127,13 @@ module.exports = {
 
       logger("log", `${type}: ${sent}`);
     } catch (err) {
+      wss.emit(
+        "usecases-error",
+        JSON.stringify({
+          message: err.message,
+          username,
+        })
+      );
       logger("error", `${type}: ${err.message}`);
     }
   },

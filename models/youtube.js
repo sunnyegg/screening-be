@@ -23,7 +23,7 @@ module.exports = {
       output.set(url, convertedText);
     } catch (err) {
       logger("error", err.message);
-      output.set(url, "error");
+      output.set(url, "error => " + err.message);
     }
   },
   CheckYoutubeLikes: async (browser, url, output) => {
@@ -43,7 +43,7 @@ module.exports = {
       output.set(url, convertedText);
     } catch (err) {
       logger("error", err.message);
-      output.set(url, "error");
+      output.set(url, "error => " + err.message);
     }
   },
   CheckYoutubeSubscribers: async (browser, url, output) => {
@@ -63,7 +63,7 @@ module.exports = {
       output.set(url, convertedText);
     } catch (err) {
       logger("error", err.message);
-      output.set(url, "error");
+      output.set(url, "error => " + err.message);
     }
   },
   CheckYoutubeViews: async (browser, url, output) => {
@@ -86,7 +86,7 @@ module.exports = {
       output.set(url, convertedText);
     } catch (err) {
       logger("error", err.message);
-      output.set(url, "error");
+      output.set(url, "error => " + err.message);
     }
   },
 };
