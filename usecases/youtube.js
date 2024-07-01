@@ -9,8 +9,7 @@ module.exports = {
       const output = new Map();
 
       const browser = await puppeteer.launch({
-        headless: false,
-        // executablePath: "/usr/bin/google-chrome",
+        executablePath: "/usr/bin/google-chrome",
         args: [
           "--disable-gpu",
           "--disable-dev-shm-usage",
