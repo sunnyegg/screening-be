@@ -127,7 +127,7 @@ module.exports = {
           })
         );
       }
-      logger("error", `error ${id}: ${err.message}`);
+      logger("error", `error ${username}: ${err.message}`);
     }
   },
 };
