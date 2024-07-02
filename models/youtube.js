@@ -83,7 +83,7 @@ module.exports = {
       await page.setViewport({ width: 1080, height: 1024 });
       await page.waitForNetworkIdle();
 
-      const elMore = await page.waitForSelector("#expand", {
+      const elMore = await page.waitForSelector("#bottom-row", {
         timeout: 2000,
       });
       await elMore.click();
