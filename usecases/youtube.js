@@ -1,15 +1,12 @@
 const utils = require("../utils");
 const logger = require("../utils/logger");
-const puppeteerArgs = require("../configs/puppeteer");
 const models = require("../models");
 
 module.exports = {
   comment: async (browser, output, urls, type, username, wss) => {
     try {
-      const mappedUrls = utils.CheckAndSplitUrls(urls);
-
-      for (let i = 0; i < mappedUrls.yt.length; i++) {
-        const url = mappedUrls.yt[i];
+      for (let i = 0; i < urls.length; i++) {
+        const url = urls[i];
         await models.youtube.CheckYoutubeComments(browser, url, output);
         wss.emit(
           "progress",
@@ -33,10 +30,8 @@ module.exports = {
   },
   like: async (browser, output, urls, type, username, wss) => {
     try {
-      const mappedUrls = utils.CheckAndSplitUrls(urls);
-
-      for (let i = 0; i < mappedUrls.yt.length; i++) {
-        const url = mappedUrls.yt[i];
+      for (let i = 0; i < urls.length; i++) {
+        const url = urls[i];
         await models.youtube.CheckYoutubeLikes(browser, url, output);
         wss.emit(
           "progress",
@@ -60,10 +55,8 @@ module.exports = {
   },
   subscriber: async (browser, output, urls, type, username, wss) => {
     try {
-      const mappedUrls = utils.CheckAndSplitUrls(urls);
-
-      for (let i = 0; i < mappedUrls.yt.length; i++) {
-        const url = mappedUrls.yt[i];
+      for (let i = 0; i < urls.length; i++) {
+        const url = urls[i];
         await models.youtube.CheckYoutubeSubscribers(browser, url, output);
         wss.emit(
           "progress",
@@ -87,10 +80,8 @@ module.exports = {
   },
   view: async (browser, output, urls, type, username, wss) => {
     try {
-      const mappedUrls = utils.CheckAndSplitUrls(urls);
-
-      for (let i = 0; i < mappedUrls.yt.length; i++) {
-        const url = mappedUrls.yt[i];
+      for (let i = 0; i < urls.length; i++) {
+        const url = urls[i];
         await models.youtube.CheckYoutubeViews(browser, url, output);
         wss.emit(
           "progress",

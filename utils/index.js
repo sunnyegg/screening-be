@@ -1,34 +1,3 @@
-const CheckIgLikes = async (browser, url, output) => {
-  try {
-    const page = await browser.newPage();
-    await page.goto(url);
-    await page.setViewport({ width: 1080, height: 1024 });
-    await page.waitForNetworkIdle();
-
-    try {
-      const element = await page.waitForSelector("span ::-p-text( likes)", {
-        timeout: 100,
-      });
-      const text = await element.evaluate((el) => el.textContent);
-      const convertedText = ConvertTextToNumber(text, "likes");
-
-      console.log(`${url} => ${text}`);
-
-      output.set(url, convertedText);
-    } catch (err) {
-      if (err.name === "TimeoutError") {
-        await page.waitForSelector("span ::-p-text(Liked by)");
-
-        console.log(`${url} => less than 50 likes`);
-
-        output.set(url, "less than 100 likes");
-      }
-    }
-  } catch (err) {
-    output.set(url, "error");
-  }
-};
-
 const CheckIgReelViews = async (page, url, output) => {
   try {
     const selectorAvatar =
@@ -177,32 +146,15 @@ const IsYoutubeLink = (url) => {
   return false;
 };
 
-const CheckAndSplitUrls = (urls) => {
-  const output = {
-    ig: [],
-    tt: [],
-    yt: [],
-  };
-
-  for (const url of urls) {
-    if (IsIgLink(url)) output.ig.push(url);
-    if (IsTiktokLink(url)) output.tt.push(url);
-    if (IsYoutubeLink(url)) output.yt.push(url);
-  }
-  return output;
-};
-
 const Delay = (ms) => {
   return new Promise((resolve) => setTimeout(resolve, ms));
 };
 
 module.exports = {
-  CheckIgLikes,
   CheckTiktokLikes,
   IsIgLink,
   IsTiktokLink,
   IsYoutubeLink,
-  CheckAndSplitUrls,
   CheckTiktokViews,
   DigitFormatter,
   ConvertTextToNumber,
