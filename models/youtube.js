@@ -21,6 +21,8 @@ module.exports = {
       const convertedText = utils.ConvertTextToNumber(text, "");
 
       output.set(url, convertedText);
+
+      await page.close();
     } catch (err) {
       logger("error", err.message);
       output.set(url, "error => " + err.message);
@@ -41,6 +43,7 @@ module.exports = {
       const convertedText = utils.DigitFormatter(text);
 
       output.set(url, convertedText);
+      await page.close();
     } catch (err) {
       logger("error", err.message);
       output.set(url, "error => " + err.message);
@@ -56,7 +59,7 @@ module.exports = {
       const element = await page.waitForSelector(
         "span ::-p-text( subscribers)",
         {
-          timeout: 100,
+          timeout: 1000,
         }
       );
 
@@ -66,6 +69,8 @@ module.exports = {
       );
 
       output.set(url, convertedText);
+
+      await page.close();
     } catch (err) {
       logger("error", err.message);
       output.set(url, "error => " + err.message);
@@ -78,10 +83,10 @@ module.exports = {
       await page.setViewport({ width: 1080, height: 1024 });
       await page.waitForNetworkIdle();
 
-      await page.waitForSelector("#bottom-row", {
-        timeout: 1000,
+      const elMore = await page.waitForSelector("#expand", {
+        timeout: 2000,
       });
-      await page.click("#bottom-row");
+      await elMore.click();
 
       const element = await page.waitForSelector("#info > span:nth-child(1)");
 
@@ -89,6 +94,8 @@ module.exports = {
       const convertedText = utils.ConvertTextToNumber(text, "views");
 
       output.set(url, convertedText);
+
+      await page.close();
     } catch (err) {
       logger("error", err.message);
       output.set(url, "error => " + err.message);

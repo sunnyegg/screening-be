@@ -192,6 +192,10 @@ const CheckAndSplitUrls = (urls) => {
   return output;
 };
 
+const Delay = (ms) => {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+};
+
 module.exports = {
   CheckIgLikes,
   CheckTiktokLikes,
@@ -202,4 +206,5 @@ module.exports = {
   CheckTiktokViews,
   DigitFormatter,
   ConvertTextToNumber,
+  Delay,
 };

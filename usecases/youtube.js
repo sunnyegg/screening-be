@@ -23,6 +23,7 @@ module.exports = {
           })
         );
       }
+      await utils.Delay(1000);
       await browser.close();
 
       const sent = wss.emit(
@@ -64,6 +65,7 @@ module.exports = {
           })
         );
       }
+      await utils.Delay(1000);
       await browser.close();
 
       const sent = wss.emit(
@@ -105,6 +107,7 @@ module.exports = {
           })
         );
       }
+      await utils.Delay(1000);
       await browser.close();
 
       const sent = wss.emit(
@@ -146,6 +149,7 @@ module.exports = {
           })
         );
       }
+      await utils.Delay(1000);
       await browser.close();
 
       const sent = wss.emit(
